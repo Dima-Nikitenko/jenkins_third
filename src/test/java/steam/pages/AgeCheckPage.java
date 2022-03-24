@@ -1,6 +1,7 @@
 package steam.pages;
 
 import framework.BasePage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import framework.elements.Button;
 import framework.elements.DropDown;
@@ -19,6 +20,7 @@ public class AgeCheckPage extends BasePage {
         proveAgeOfMajority();
     }
 
+    @Step("Confirming age of majority...")
     private void proveAgeOfMajority() {
         int currentYear = Calendar.getInstance().get(Calendar.YEAR);
         int workaroundYear = currentYear - 18;
