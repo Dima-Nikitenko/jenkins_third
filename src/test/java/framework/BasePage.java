@@ -1,11 +1,13 @@
 package framework;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import framework.elements.Label;
 import org.openqa.selenium.NoSuchElementException;
 
 import java.util.Date;
 
+import static io.qameta.allure.Allure.getLifecycle;
 import static org.apache.commons.logging.LogFactory.getLog;
 
 public class BasePage {
@@ -34,12 +36,18 @@ public class BasePage {
         assertCorrectPage();
     }
 
+    @Step("Opening {pageTitle} page...")
     private void initPage(final By pageLocator, final String pageTitle) {
+        getLifecycle().updateStep(step -> {
+                    step.getParameters().remove(0);
+                    step.getParameters().remove(0);
+                });
         this.pageLocator = pageLocator;
         this.pageTitle = pageTitle;
         fullPageName = String.format(getLog("locale.page") + " '%1$s'", this.pageTitle);
     }
 
+    @Step("Making sure that the open page is correct...")
     private void assertCorrectPage() {
         long initTime = new Date().getTime();
         logger.info(String.format(getLogProperty("locale.page.load"), pageTitle));
