@@ -1,10 +1,13 @@
 package steam.pages;
 
+import io.qameta.allure.Step;
 import org.testng.Assert;
 import framework.BasePage;
 import org.openqa.selenium.By;
 import framework.elements.Label;
 import framework.elements.Button;
+
+import static io.qameta.allure.Allure.getLifecycle;
 
 public class BaseSteamPage extends BasePage {
     private static final String DROPDOWN_LANGUAGE = "dropdown.language";
@@ -22,7 +25,11 @@ public class BaseSteamPage extends BasePage {
         super(By.className(uniqueElement), "Base Steam");
     }
 
+    @Step("Making sure that the page language is {language}...")
     public void checkLanguage(String language) {
+        getLifecycle().updateStep(step -> {
+            step.getParameters().remove(0);
+        });
         locale.setupLocale(language);
         Label lblLanguageMenuItem = new Label(lblLanguageMenuItemLocator, language, "Language Dropdown Item");
         if (!lblLanguageMenu.getText().contains(locale.getLocalizedElementProperty(DROPDOWN_LANGUAGE))) {
@@ -32,7 +39,12 @@ public class BaseSteamPage extends BasePage {
         Assert.assertTrue(lblLanguageMenu.getText().contains(locale.getLocalizedElementProperty(DROPDOWN_LANGUAGE)));
     }
 
+    @Step("Navigating menu using {menuItem} and {subMenuItem} items...")
     public void navigateMenu(String menuItem, String subMenuItem) {
+        getLifecycle().updateStep(step -> {
+            step.getParameters().remove(0);
+            step.getParameters().remove(0);
+        });
         String localMenuItem = locale.getLocalizedElementProperty("menu.".concat(menuItem));
         String localSubMenuItem = locale.getLocalizedElementProperty("submenu.".concat(subMenuItem));
         Label lblMenu = new Label(lblMenuLocator, localMenuItem, localMenuItem);
