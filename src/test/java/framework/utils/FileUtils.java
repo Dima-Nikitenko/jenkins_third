@@ -42,6 +42,7 @@ public class FileUtils {
 
     @Step("Waiting for the file to download and searching for this file in the directory...")
     public static void assertDownload(By locator) {
+        getLifecycle().updateStep(step -> step.getParameters().remove(0));
         String downloadHref = Browser.getDriver().findElement(locator).getAttribute("href");
         String fileNameFromHref = downloadHref.substring(downloadHref.lastIndexOf('/')+1);
         String downloadedFile = Paths.get(fileNameFromHref).getFileName().toString();
