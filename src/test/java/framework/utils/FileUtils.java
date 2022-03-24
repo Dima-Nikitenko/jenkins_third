@@ -2,6 +2,7 @@ package framework.utils;
 
 import framework.Browser;
 import framework.Logger;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -39,6 +40,7 @@ public class FileUtils {
         }
     }
 
+    @Step("Waiting for the file to download and searching for this file in the directory...")
     public static void assertDownload(By locator) {
         String downloadHref = Browser.getDriver().findElement(locator).getAttribute("href");
         String fileNameFromHref = downloadHref.substring(downloadHref.lastIndexOf('/')+1);
