@@ -1,6 +1,7 @@
 package steam.pages;
 
 import framework.BasePage;
+import io.qameta.allure.Step;
 import org.apache.commons.lang3.text.WordUtils;
 import org.openqa.selenium.By;
 import framework.elements.Label;
@@ -28,6 +29,7 @@ public class ActionPage extends BasePage {
         super(By.xpath(String.format(uniqueElement, lblTitle)), "Action");
     }
 
+    @Step("Searching for highest profit in Recommended Specials...")
     private String getHighestProfitInSpecials() {
         String textFromElement;
         String isolatedDiscount;
@@ -59,6 +61,7 @@ public class ActionPage extends BasePage {
         }
     }
 
+    @Step("Choosing most profitable app...")
     public void chooseMostProfitableApp() {
         Label lblMostProfitableApp = new Label(lblSpecialsMaxDiscount, getHighestProfitInSpecials(), "Most profitable app");
         lblMostProfitableApp.moveToElement();
