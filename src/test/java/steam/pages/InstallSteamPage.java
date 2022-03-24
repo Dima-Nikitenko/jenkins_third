@@ -2,6 +2,7 @@ package steam.pages;
 
 import framework.BasePage;
 import framework.utils.FileUtils;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import framework.elements.Button;
 
@@ -16,6 +17,7 @@ public class InstallSteamPage extends BasePage {
         super(By.id(uniqueElement), "Install Steam");
     }
 
+    @Step("Downloading Steam...")
     public void download() {
         String btnName = locale.getLocalizedElementProperty(BUTTON_DOWNLOAD_STEAM);
         Button btnInstallSteam = new Button(btnInstallSteamLocator, btnName, btnName);
