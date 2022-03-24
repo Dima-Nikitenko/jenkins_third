@@ -14,6 +14,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.Duration;
 
+import static io.qameta.allure.Allure.getLifecycle;
 import static framework.Logger.getLogProperty;
 
 public class FileUtils {
